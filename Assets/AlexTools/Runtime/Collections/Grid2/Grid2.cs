@@ -6,16 +6,18 @@ using UnityEngine;
 
 namespace AlexTools.Collections
 {
-    public class Grid2D<T> : IGrid2D<T>, IReadOnlyGrid2D<T>
+    public class Grid2<T> : IGrid2<T>, IReadOnlyGrid2<T>
     {
         private readonly T[] _array;
-        
+
         public int Width => Size.x;
         public int Height => Size.y;
 
         public Vector2Int Size => Bounds.size;
+
         public Vector2Int Position => Bounds.position;
-        
+        public Vector2 Center => Bounds.center;
+
         public RectInt Bounds { get; }
 
         public T this[int index]
@@ -36,20 +38,20 @@ namespace AlexTools.Collections
             set => this[GetIndex(position)] = value;
         }
 
-        public Grid2D(RectInt bounds)
+        public Grid2(RectInt bounds)
         {
             Bounds = bounds;
             _array = new T[Width * Height];
         }
 
-        public Grid2D(IReadOnlyGrid2D<T> grid) : this(grid.Bounds)
+        public Grid2(IReadOnlyGrid2<T> grid) : this(grid.Bounds)
         {
             AssignValues((x, y) => grid[x, y]);
         }
 
-        public Grid2D(Vector2Int position, Vector2Int size) : this(new RectInt(position, size)){}
+        public Grid2(Vector2Int position, Vector2Int size) : this(new RectInt(position, size)){}
 
-        public Grid2D(int x, int y, int width, int height) : this(new Vector2Int(width, height), new Vector2Int(x, y)){}
+        public Grid2(int x, int y, int width, int height) : this(new Vector2Int(width, height), new Vector2Int(x, y)){}
 
         public int GetIndex(int x, int y) => (x - Position.x) + (y - Position.y) * Width;
         public int GetIndex(Vector2Int position) => GetIndex(position.x, position.y);
@@ -57,7 +59,7 @@ namespace AlexTools.Collections
         public bool InBounds(int x, int y) => InBounds(new Vector2Int(x, y));
         public bool InBounds(Vector2Int position) => Bounds.Contains(position);
             
-        public virtual void ForEach(Action<int, int> action)
+        public void ForEach(Action<int, int> action)
         {
             for (int y = Bounds.yMin; y < Bounds.yMax; y++)
             {

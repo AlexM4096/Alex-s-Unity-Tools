@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace AlexTools.Collections
 {
-    public interface IReadOnlyGrid2D<out T> : IEnumerable<T>
+    public interface IReadOnlyGrid2<out T> : IEnumerable<T>
     {
         int Width { get; }
         int Height { get; }
         
         Vector2Int Size { get; }
         Vector2Int Position { get; }
+        Vector2 Center { get; }
         RectInt Bounds { get; }
 
         T this[int index] { get; }

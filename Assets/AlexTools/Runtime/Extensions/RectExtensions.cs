@@ -16,6 +16,9 @@ namespace AlexTools.Extensions
         public static Rect RandomRect(Rect size, Rect rect) 
             => RandomRect(size.min, size.max, rect);
         
+        public static Rect RandomRect(Rect rect) 
+            => RandomRect(rect, rect);
+        
         public static Rect RandomRect(Vector2 minSize, Vector2 maxSize, Vector2Int position = default)
         {
             Vector2 size = VectorExtensions.RandomVector2(minSize, maxSize);
@@ -34,6 +37,9 @@ namespace AlexTools.Extensions
         public static RectInt RandomRectInt(RectInt size, RectInt rectInt) 
             => RandomRectInt(size.min, size.max, rectInt);
         
+        public static RectInt RandomRectInt(RectInt rectInt) 
+            => RandomRectInt(rectInt, rectInt);
+        
         public static RectInt RandomRectInt(Vector2Int minSize, Vector2Int maxSize, Vector2Int position = default)
         {
             Vector2Int size = VectorExtensions.RandomVector2Int(minSize, maxSize);
@@ -47,17 +53,23 @@ namespace AlexTools.Extensions
 
         #region Scale
 
-        public static Rect Scale(this Rect rect, int scale) => new(
-            rect.position * scale, rect.size * scale);
+        public static Rect Scale(this Rect rect, float scale) => 
+            new(rect.position * scale, rect.size * scale);
         
-        public static Rect Scale(this Rect rect, Vector2Int scale) => new(
-            rect.position * scale, rect.size * scale);
+        public static Rect Scale(this Rect rect, float scaleX, float scaleY) => 
+            new(rect.position.Scale(scaleX, scaleY), rect.size.Scale(scaleX, scaleY));
         
-        public static RectInt Scale(this RectInt rectInt, int scale) => new(
-            rectInt.position * scale, rectInt.size * scale);
+        public static Rect Scale(this Rect rect, Vector2 scale) => 
+            new(rect.position * scale, rect.size * scale);
         
-        public static RectInt Scale(this RectInt rectInt, Vector2Int scale) => new(
-            rectInt.position * scale, rectInt.size * scale);
+        public static RectInt Scale(this RectInt rectInt, int scale) => 
+            new(rectInt.position * scale, rectInt.size * scale);
+        
+        public static RectInt Scale(this RectInt rectInt, int scaleX, int scaleY) => 
+            new(rectInt.position.Scale(scaleX, scaleY), rectInt.size.Scale(scaleX, scaleY));
+        
+        public static RectInt Scale(this RectInt rectInt, Vector2Int scale) => 
+            new(rectInt.position * scale, rectInt.size * scale);
 
         #endregion
 
