@@ -56,7 +56,10 @@ namespace AlexTools.Collections
         public int GetIndex(Vector3Int position) =>
             GetIndex(position.x, position.y, position.z);
 
-        public bool InBounds(int x, int y, int z) => InBounds(new Vector3Int(x, y, z));
+        public bool InBounds(int x, int y, int z) => 
+            Bounds.xMin <= x && x < Bounds.xMax &&
+            Bounds.yMin <= y && y < Bounds.yMax &&
+            Bounds.zMin <= z && z < Bounds.zMax;
 
         public bool InBounds(Vector3Int position) => Bounds.Contains(position);
 

@@ -2,7 +2,8 @@
 
 namespace AlexTools.Collections
 {
-    public interface IReadOnlyBiMap<TKey1, TKey2> : IReadOnlyCollection<KeyValuePair<TKey1, TKey2>>
+    public interface IReadOnlyBiMap<TKey1, TKey2> : 
+        IReadOnlyCollection<KeyValuePair<TKey1, TKey2>>
         where TKey1 : notnull
         where TKey2 : notnull
     {

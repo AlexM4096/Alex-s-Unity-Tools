@@ -1,23 +1,27 @@
 ﻿using System.Collections.Generic;
-using AlexTools.Classes;
+using AlexTools.Comparers;
 using UnityEngine;
 
 namespace AlexTools
 {
     public static class Waiters
     {
+        private const int DictionaryCapacity = 100;
+        
+        private static readonly float FrameDurationInSeconds = 1f / Application.targetFrameRate;
+        
         private static readonly Dictionary<float, WaitForSeconds> WaitForSecondsDictionary = 
-            new(100, new FloatComparer());
+            new(DictionaryCapacity, new FloatComparer());
 
         public static WaitForSeconds GetWaitForSeconds(float seconds) 
         {
-            if (seconds < 1f / Application.targetFrameRate) return null;
+            if (seconds < FrameDurationInSeconds) return null;
 
-            if (WaitForSecondsDictionary.TryGetValue(seconds, out var value))
-            {
-                value = new WaitForSeconds(seconds);
-                WaitForSecondsDictionary.Add(seconds, value);
-            }
+            if (WaitForSecondsDictionary.TryGetValue(seconds, out var value)) 
+                return value;
+                
+            value = new WaitForSeconds(seconds);
+            WaitForSecondsDictionary.Add(seconds, value);    
             
             return value;
         }

@@ -6,7 +6,7 @@ namespace AlexTools.Extensions
 {
     public static class ListExtensions
     {
-        public static T GetRandomItem<T>(this IList<T> list) => list[Random.Range(0, list.Count - 1)];
+        public static T GetRandomItem<T>(this IList<T> list) => list[Random.Range(0, list.Count)];
         public static object GetRandomItem(this IList list) => list[Random.Range(0, list.Count)];
         
         public static bool RemoveRandomItem<T>(this IList<T> list) => list.Remove(GetRandomItem(list));

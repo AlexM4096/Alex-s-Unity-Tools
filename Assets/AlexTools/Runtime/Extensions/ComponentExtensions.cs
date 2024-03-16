@@ -4,6 +4,7 @@ namespace AlexTools.Extensions
 {
     public static class ComponentExtensions
     {
+        //Пока под вопросом
         public static void EnableChildren(this Component component) 
             => component.transform.EnableChildren();
         

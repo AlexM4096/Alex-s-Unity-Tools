@@ -53,23 +53,23 @@ namespace AlexTools.Extensions
 
         #region Scale
 
-        public static Rect Scale(this Rect rect, float scale) => 
-            new(rect.position * scale, rect.size * scale);
+        public static Rect Scale(this Rect rect, float scale) 
+            => new(rect.position * scale, rect.size * scale);
         
-        public static Rect Scale(this Rect rect, float scaleX, float scaleY) => 
-            new(rect.position.Scale(scaleX, scaleY), rect.size.Scale(scaleX, scaleY));
+        public static Rect Scale(this Rect rect, float scaleX, float scaleY) 
+            => new(rect.position.Scale(scaleX, scaleY), rect.size.Scale(scaleX, scaleY));
         
-        public static Rect Scale(this Rect rect, Vector2 scale) => 
-            new(rect.position * scale, rect.size * scale);
+        public static Rect Scale(this Rect rect, Vector2 scale) 
+            => new(rect.position * scale, rect.size * scale);
         
-        public static RectInt Scale(this RectInt rectInt, int scale) => 
-            new(rectInt.position * scale, rectInt.size * scale);
+        public static RectInt Scale(this RectInt rectInt, int scale) 
+            => new(rectInt.position * scale, rectInt.size * scale);
         
-        public static RectInt Scale(this RectInt rectInt, int scaleX, int scaleY) => 
-            new(rectInt.position.Scale(scaleX, scaleY), rectInt.size.Scale(scaleX, scaleY));
+        public static RectInt Scale(this RectInt rectInt, int scaleX, int scaleY) 
+            => new(rectInt.position.Scale(scaleX, scaleY), rectInt.size.Scale(scaleX, scaleY));
         
-        public static RectInt Scale(this RectInt rectInt, Vector2Int scale) => 
-            new(rectInt.position * scale, rectInt.size * scale);
+        public static RectInt Scale(this RectInt rectInt, Vector2Int scale) 
+            => new(rectInt.position * scale, rectInt.size * scale);
 
         #endregion
 
@@ -103,10 +103,10 @@ namespace AlexTools.Extensions
 
         #endregion
 
-        public static Rect Centralize(this Rect rect) => new(
-            rect.position - rect.size / 2, rect.size);
+        public static Rect Centralize(this Rect rect) 
+            => new(rect.position - rect.size / 2, rect.size);
         
-        public static RectInt Centralize(this RectInt rectInt) => new(
-            rectInt.position - rectInt.size / 2, rectInt.size);
+        public static RectInt Centralize(this RectInt rectInt) 
+            => new(rectInt.position - rectInt.size / 2, rectInt.size);
     }
 }

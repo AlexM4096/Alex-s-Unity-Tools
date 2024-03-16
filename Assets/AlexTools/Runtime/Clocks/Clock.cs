@@ -64,8 +64,7 @@ namespace AlexTools.Clocks
                 ResumeEvent.Invoke();
             }
         }
-
-
+        
         public void Pause()
         {
             if (IsTicking)
@@ -92,23 +91,17 @@ namespace AlexTools.Clocks
 
         #endregion
         
-        
-        
         #region Editing
 
         public void Add(float time)
         {
-            if (time < 0)
-                throw new ArgumentException(nameof(time));
-            
+            if (time < 0) return;
             CurrentTime += time;
         }
         
         public void Subtract(float time)
         {
-            if (time < 0)
-                throw new ArgumentException(nameof(time));
-            
+            if (time < 0) return;
             CurrentTime -= time;
         }
         
