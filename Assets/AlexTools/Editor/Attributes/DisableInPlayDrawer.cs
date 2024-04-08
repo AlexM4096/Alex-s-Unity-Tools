@@ -7,17 +7,13 @@ using UnityEngine.UIElements;
 
 namespace AlexTools
 {
-    [CustomPropertyDrawer(typeof(HideInPlay))]
-    public class HideInPlayDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(DisableInPlay))]
+    public class DisableInPlayDrawer : PropertyDrawer
     {
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
-            VisualElement content = base.CreatePropertyGUI(property);
-            content ??= new VisualElement();
-            
-            PropertyField propertyField = new(property);
-            content.Add(propertyField);
-    
+            var content = new PropertyField(property);
+                
             if (Application.isPlaying)
                 content.Disable();
 

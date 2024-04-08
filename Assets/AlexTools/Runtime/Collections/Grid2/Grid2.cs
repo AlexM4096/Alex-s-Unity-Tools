@@ -95,7 +95,6 @@ namespace AlexTools.Collections
             ForEach(position => this[position] = func(position));
 
         public IEnumerator<T> GetEnumerator() => new NoAllocEnumerator<T>(_array);
-
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }    

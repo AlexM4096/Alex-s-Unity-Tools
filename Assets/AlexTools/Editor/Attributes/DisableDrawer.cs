@@ -6,19 +6,13 @@ using UnityEngine.UIElements;
 
 namespace AlexTools
 {
-    [CustomPropertyDrawer(typeof(ShowOnlyAttribute))]
-    public class ShowOnlyDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(DisableAttribute))]
+    public class DisableDrawer : PropertyDrawer
     {
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
-            VisualElement content = base.CreatePropertyGUI(property);
-            content ??= new VisualElement();
-            
-            PropertyField propertyField = new(property);
-            content.Add(propertyField);
-
+            var content = new PropertyField(property);
             content.Disable();
-
             return content;
         }
     }

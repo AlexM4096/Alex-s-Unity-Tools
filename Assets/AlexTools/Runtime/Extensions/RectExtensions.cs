@@ -4,53 +4,6 @@ namespace AlexTools.Extensions
 {
     public static class RectExtensions
     {
-        #region Random
-
-        public static Rect RandomRect(Vector2 minSize, Vector2 maxSize, Rect rect)
-        {
-            Vector2 size = VectorExtensions.RandomVector2(minSize, maxSize);
-            Vector2 position = VectorExtensions.RandomVector2(rect.min, rect.max - size);
-            return new Rect(position, size);
-        }
-
-        public static Rect RandomRect(Rect size, Rect rect) 
-            => RandomRect(size.min, size.max, rect);
-        
-        public static Rect RandomRect(Rect rect) 
-            => RandomRect(rect, rect);
-        
-        public static Rect RandomRect(Vector2 minSize, Vector2 maxSize, Vector2Int position = default)
-        {
-            Vector2 size = VectorExtensions.RandomVector2(minSize, maxSize);
-            return new Rect(position, size);
-        }
-        
-        public static Rect RandomRect(Rect size, Vector2Int position) 
-            => RandomRect(size.min, size.max, position);
-        public static RectInt RandomRectInt(Vector2Int minSize, Vector2Int maxSize, RectInt rectInt)
-        {
-            Vector2Int size = VectorExtensions.RandomVector2Int(minSize, maxSize);
-            Vector2Int position = VectorExtensions.RandomVector2Int(rectInt.min, rectInt.max - size);
-            return new RectInt(position, size);
-        }
-        
-        public static RectInt RandomRectInt(RectInt size, RectInt rectInt) 
-            => RandomRectInt(size.min, size.max, rectInt);
-        
-        public static RectInt RandomRectInt(RectInt rectInt) 
-            => RandomRectInt(rectInt, rectInt);
-        
-        public static RectInt RandomRectInt(Vector2Int minSize, Vector2Int maxSize, Vector2Int position = default)
-        {
-            Vector2Int size = VectorExtensions.RandomVector2Int(minSize, maxSize);
-            return new RectInt(position, size);
-        }
-        
-        public static RectInt RandomRect(RectInt size, Vector2Int position) 
-            => RandomRectInt(size.min, size.max, position);
-
-        #endregion
-
         #region Scale
 
         public static Rect Scale(this Rect rect, float scale) 

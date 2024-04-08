@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace AlexTools.Extensions
 {
@@ -6,7 +8,7 @@ namespace AlexTools.Extensions
     {
         public static void Enable(this GameObject gameObject) => gameObject.SetActive(true);
         public static void Disable(this GameObject gameObject) => gameObject.SetActive(false);
-        
+
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
             if (!gameObject.TryGetComponent(out T component))
@@ -14,5 +16,32 @@ namespace AlexTools.Extensions
 
             return component;
         }
+
+        public static bool HasComponent<T>(this GameObject gameObject) where T : Component => 
+            gameObject.GetComponent<T>();
+
+        public static bool RemoveComponent<T>(this GameObject gameObject) where T : Component
+        {
+            if (!gameObject.TryGetComponent(out T component))
+                return false;
+            
+            Object.Destroy(component);
+            return true;
+        }
+        
+        public static void RemoveAllComponents<T>(this GameObject gameObject) where T : Component
+        {
+            var components = gameObject.GetComponents<T>();
+            components.ForEach(Object.Destroy);
+        }
+
+        public static string GetPath(this GameObject gameObject) =>
+            '/' + string.Join('/', gameObject
+                    .GetComponentsInParent<Transform>()
+                    .Select(t => t.name)
+                    .Reverse());
+
+        public static string GetFullPath(this GameObject gameObject) =>
+            $"{gameObject.GetPath()}/{gameObject.name}";
     }
 }

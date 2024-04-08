@@ -1,22 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AlexTools.Extensions
 {
     public static class ListExtensions
     {
-        public static T GetRandomItem<T>(this IList<T> list) => list[Random.Range(0, list.Count)];
-        public static object GetRandomItem(this IList list) => list[Random.Range(0, list.Count)];
+        public static T GetRandomItem<T>(this IList<T> list) => list[list.GetRandomIndex()];
+        public static object GetRandomItem(this IList list) => list[list.GetRandomIndex()];
         
-        public static bool RemoveRandomItem<T>(this IList<T> list) => list.Remove(GetRandomItem(list));
-        public static void RemoveRandomItem(this IList list) => list.Remove(GetRandomItem(list));
+        public static T GetRandomItem<T>(this IReadOnlyList<T> list) => list[list.GetRandomIndex()];
+
+        public static T RemoveRandomItem<T>(this IList<T> list)
+        {
+            int index = list.GetRandomIndex();
+            T value = list[index];
+            list.RemoveAt(index);
+            return value;
+        }
+        
+        public static object RemoveRandomItem(this IList list)
+        {
+            int index = list.GetRandomIndex();
+            object value = list[index];
+            list.RemoveAt(index);
+            return value;
+        }
 
         public static void Shuffle(this IList list)
         {
             for (int i = 0; i < list.Count; i++)
             {
-                int index = Random.Range(0, list.Count);
+                int index = list.GetRandomIndex();
                 (list[i], list[index]) = (list[index], list[i]);
             }
         }

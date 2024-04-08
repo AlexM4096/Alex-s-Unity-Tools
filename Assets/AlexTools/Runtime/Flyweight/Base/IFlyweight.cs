@@ -5,7 +5,7 @@ namespace AlexTools.Flyweight
         where TSettings : FlyweightSettings<TFlyweight, TSettings>
     {
         TSettings Settings { get; }
-        void Initialize(TSettings settings);
         void Release();
+        void Initialize(TSettings settings);
     }
 }

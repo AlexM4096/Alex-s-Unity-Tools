@@ -4,26 +4,33 @@ using Unity.VisualScripting;
 
 namespace AlexTools.Collections
 {
-    public class BiMap<TKey1, TKey2> : IBiMap<TKey1, TKey2>, IReadOnlyBiMap<TKey1, TKey2>
+    public sealed class BiMap<TKey1, TKey2> : 
+        IBiMap<TKey1, TKey2>, 
+        IReadOnlyBiMap<TKey1, TKey2>
+        where TKey1 : notnull
+        where TKey2 : notnull
     {
         private readonly Dictionary<TKey1, TKey2> _forward;
         private readonly Dictionary<TKey2, TKey1> _reverse;
 
         public IReadOnlyDictionary<TKey1, TKey2> Forward => _forward;
         public IReadOnlyDictionary<TKey2, TKey1> Reverse => _reverse;
-        
+
+        public IEnumerable<TKey1> First => Forward.Keys;
+        public IEnumerable<TKey2> Second => Reverse.Keys;
+
         public int Count => Forward.Count;
 
         public TKey1 this[TKey2 key2]
         {
             get => _reverse[key2];
-            set => _reverse[key2] = value;
+            set => Add(value, key2);
         }
 
         public TKey2 this[TKey1 key1]
         {
             get => _forward[key1];
-            set => _forward[key1] = value;
+            set => Add(key1, value);
         }
 
         public BiMap()
@@ -69,9 +76,12 @@ namespace AlexTools.Collections
         //     _reverse = new Dictionary<TKey2, TKey1>(reverse, comparerKey2);
         // }
 
-        public void Add(TKey1 key1, TKey2 key2) =>
-            TryAdd(key1, key2);
-        
+        public void Add(TKey1 key1, TKey2 key2)
+        {
+            _forward.Add(key1, key2);
+            _reverse.Add(key2, key1);
+        }
+
         public bool Contains(TKey1 key1, TKey2 key2) => 
             Forward.ContainsKey(key1) && Reverse.ContainsKey(key2);
 
@@ -83,44 +93,29 @@ namespace AlexTools.Collections
 
         public bool Remove(TKey1 key1)
         {
-            if (!TryGetValue(key1, out TKey2 key2)) 
+            if (!TryGetValue(key1, out var key2)) 
                 return false;
             
-            _forward.Remove(key1);
-            _reverse.Remove(key2);
-
-            return true;
+            return Remove(key1, key2);
         }
         
         public bool Remove(TKey2 key2)
         {
-            if (!TryGetValue(key2, out TKey1 key1)) 
+            if (!TryGetValue(key2, out var key1)) 
                 return false;
             
-            _forward.Remove(key1);
-            _reverse.Remove(key2);
-
-            return true;
+            return Remove(key1, key2);
         }
-        
-        public bool Remove(TKey1 key1, TKey2 key2)
-        {
-            if (!Contains(key1, key2)) 
-                return false;
-            
-            _forward.Remove(key1);
-            _reverse.Remove(key2);
 
-            return true;
-        }
+        public bool Remove(TKey1 key1, TKey2 key2) =>
+            _forward.Remove(key1) || _reverse.Remove(key2);
 
         public bool TryAdd(TKey1 key1, TKey2 key2)
         {
             if (Contains(key1, key2)) 
                 return false;
             
-            _forward.Add(key1, key2);
-            _reverse.Add(key2, key1);
+            Add(key1, key2);
 
             return true;
         }
@@ -135,24 +130,25 @@ namespace AlexTools.Collections
 
         public bool IsReadOnly => true;
 
-        public void Add(KeyValuePair<TKey1, TKey2> item) => 
-            Add(item.Key, item.Value);
+        public void Add(KeyValuePair<TKey1, TKey2> item) 
+            => Add(item.Key, item.Value);
 
-        public bool Contains(KeyValuePair<TKey1, TKey2> item) => 
-            Contains(item.Key, item.Value);
+        public bool Contains(KeyValuePair<TKey1, TKey2> item) 
+            => Contains(item.Key, item.Value);
 
-        public bool Remove(KeyValuePair<TKey1, TKey2> item) => 
-            Remove(item.Key, item.Value);
+        public bool Remove(KeyValuePair<TKey1, TKey2> item) 
+            => Remove(item.Key, item.Value);
 
         public void CopyTo(KeyValuePair<TKey1, TKey2>[] array, int arrayIndex)
         {
-            
+            ICollection<KeyValuePair<TKey1, TKey2>> collection = _forward;
+            collection.CopyTo(array, arrayIndex);
         }
 
         #endregion
         
-        public IEnumerator<KeyValuePair<TKey1, TKey2>> GetEnumerator() =>
-            new NoAllocEnumerator<KeyValuePair<TKey1, TKey2>>(_forward.ToArrayPooled());
+        public IEnumerator<KeyValuePair<TKey1, TKey2>> GetEnumerator() 
+            => new NoAllocEnumerator<KeyValuePair<TKey1, TKey2>>(_forward.ToArrayPooled());
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

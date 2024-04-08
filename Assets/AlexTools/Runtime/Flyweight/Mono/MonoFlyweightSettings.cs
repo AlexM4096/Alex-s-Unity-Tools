@@ -1,3 +1,4 @@
+using AlexTools.Attributes;
 using AlexTools.Extensions;
 using UnityEngine;
 
@@ -8,14 +9,17 @@ namespace AlexTools.Flyweight
         where TFlyweight : MonoFlyweight<TFlyweight, TSettings>
         where TSettings : MonoFlyweightSettings<TFlyweight, TSettings>
     {
-        [SerializeField] private GameObject prefab;
-        
+        [SerializeField] [DisableInPlay]
+        private GameObject prefab;
+
+        public GameObject Prefab => prefab;
+
         protected override TFlyweight Create()
         {
             var go = Instantiate(prefab);
             go.name = prefab.name;
 
-            var flyweight = go.AddComponent<TFlyweight>();
+            var flyweight = go.GetOrAddComponent<TFlyweight>();
             flyweight.Initialize(this);
 
             return flyweight;

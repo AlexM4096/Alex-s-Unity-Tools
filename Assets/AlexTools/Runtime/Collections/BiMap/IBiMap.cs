@@ -10,6 +10,9 @@ namespace AlexTools.Collections
         IReadOnlyDictionary<TKey1, TKey2> Forward { get; }
         IReadOnlyDictionary<TKey2, TKey1> Reverse { get; }
         
+        IEnumerable<TKey1> First { get; }
+        IEnumerable<TKey2> Second { get; }
+        
         TKey1 this[TKey2 key2] { get; set;}
         TKey2 this[TKey1 key1] { get; set;}
 
