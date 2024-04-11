@@ -16,17 +16,37 @@ namespace AlexTools.Extensions
             transform.ResetScale();
         }
         
-        public static void ResetPosition(this Transform transform) 
-            => transform.position = Vector3.zero;
+        public static void ResetPosition(this Transform transform) => 
+            transform.position = Vector3.zero;
         
-        public static void ResetRotation(this Transform transform) 
-            => transform.rotation = Quaternion.identity;
+        public static void ResetRotation(this Transform transform) => 
+            transform.rotation = Quaternion.identity;
         
-        public static void ResetScale(this Transform transform) 
-            => transform.localScale = Vector3.one;
+        public static void ResetScale(this Transform transform) => 
+            transform.localScale = Vector3.one;
 
         #endregion
 
+        #region Set
+
+        public static void Set(this Transform transform, Transform origin)
+        {
+            transform.SetPosition(origin);
+            transform.SetRotation(origin);
+            transform.SetScale(origin);
+        }
+        
+        public static void SetPosition(this Transform transform, Transform origin) => 
+            transform.position = origin.position;
+        
+        public static void SetRotation(this Transform transform, Transform origin) => 
+            transform.rotation = origin.rotation;
+        
+        public static void SetScale(this Transform transform, Transform origin) => 
+            transform.localScale = origin.localScale;
+
+        #endregion
+        
         #region Children
 
         public static IEnumerable<Transform> Children(this Transform parent) 

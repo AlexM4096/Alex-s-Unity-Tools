@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace AlexTools.Extensions
+namespace AlexTools
 {
     public static class EditorExtensions
     {

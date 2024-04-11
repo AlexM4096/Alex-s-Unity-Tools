@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 namespace AlexTools
 {
-    [CustomPropertyDrawer(typeof(DisableInPlay))]
+    [CustomPropertyDrawer(typeof(DisableInPlayAttribute))]
     public class DisableInPlayDrawer : PropertyDrawer
     {
         public override VisualElement CreatePropertyGUI(SerializedProperty property)

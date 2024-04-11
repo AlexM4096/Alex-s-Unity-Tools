@@ -7,7 +7,6 @@ namespace AlexTools.Extensions
     {
         public static T GetRandomItem<T>(this IList<T> list) => list[list.GetRandomIndex()];
         public static object GetRandomItem(this IList list) => list[list.GetRandomIndex()];
-        
         public static T GetRandomItem<T>(this IReadOnlyList<T> list) => list[list.GetRandomIndex()];
 
         public static T RemoveRandomItem<T>(this IList<T> list)
