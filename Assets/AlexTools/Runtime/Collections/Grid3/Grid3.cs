@@ -45,10 +45,8 @@ namespace AlexTools.Collections
             _array = new T[Width * Height * Depth];
         }
 
-        public Grid3(IReadOnlyGrid3<T> grid) : this(grid.Bounds)
-        {
+        public Grid3(IReadOnlyGrid3<T> grid) : this(grid.Bounds) =>
             AssignValues((x, y, z) => grid[x, y, z]);
-        }
 
         public int GetIndex(int x, int y, int z) => 
             (x - Position.x) + ((y - Position.y) + (z - Position.z) * Height) * Width;

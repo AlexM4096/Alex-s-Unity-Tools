@@ -50,11 +50,9 @@ namespace AlexTools.Collections
         public Grid2(int x, int y, int width, int height) : 
             this(new Vector2Int(width, height), new Vector2Int(x, y)){}
 
-        public Grid2(IReadOnlyGrid2<T> grid) : this(grid.Bounds)
-        {
+        public Grid2(IReadOnlyGrid2<T> grid) : this(grid.Bounds) =>
             AssignValues((x, y) => grid[x, y]);
-        }
-        
+
         public int GetIndex(int x, int y) => (x - Position.x) + (y - Position.y) * Width;
         
         public int GetIndex(Vector2Int position) => GetIndex(position.x, position.y);

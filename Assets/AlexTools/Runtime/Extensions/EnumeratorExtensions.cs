@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace AlexTools.Extensions
 {
@@ -17,5 +19,7 @@ namespace AlexTools.Extensions
             while (enumerator.MoveNext())
                 yield return enumerator.Current;
         }
+
+        public static Func<bool> AsPredicate(this IEnumerator coroutine) => coroutine.MoveNext;
     }
 }

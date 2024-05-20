@@ -1,15 +1,14 @@
-﻿using UnityEngine;
-
-namespace AlexTools.Clocks
+﻿namespace AlexTools.Clocks
 {
     public class Stopwatch : Clock
     {
-        public Stopwatch(MonoBehaviour context) : base(context, 0)
-        {
-        }
+        public Stopwatch(float initialTime = 0, string timeFormat = DefaultTimeFormat) 
+            : base(initialTime, timeFormat) {}
 
-        protected override void Tick(float deltaTime)
+        public override void Tick(float deltaTime)
         {
+            base.Tick(deltaTime);
+            
             CurrentTime += deltaTime;
         }
     }
