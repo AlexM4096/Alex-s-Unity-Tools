@@ -5,9 +5,13 @@ namespace AlexTools.Extensions
 {
     public static class ListExtensions
     {
+        public static IEnumerator ToEnumerator(this IList list) => new Enumerator(list);
+        public static IEnumerator<T> ToEnumerator<T>(this IList<T> list) => new Enumerator<T>(list);
+            
         public static T GetRandomItem<T>(this IList<T> list) => list[list.GetRandomIndex()];
-        public static object GetRandomItem(this IList list) => list[list.GetRandomIndex()];
         public static T GetRandomItem<T>(this IReadOnlyList<T> list) => list[list.GetRandomIndex()];
+
+        public static object GetRandomObject(this IList list) => list[list.GetRandomIndex()];
 
         public static T PopRandomItem<T>(this IList<T> list)
         {
@@ -17,7 +21,7 @@ namespace AlexTools.Extensions
             return value;
         }
         
-        public static object PopRandomItem(this IList list)
+        public static object PopRandomObject(this IList list)
         {
             int index = list.GetRandomIndex();
             object value = list[index];

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +9,6 @@ namespace AlexTools.Comparers
             => Mathf.Approximately(0, Vector2.Distance(a, b));
 
         public int GetHashCode(Vector2 obj) 
-            => HashCode.Combine(obj.x, obj.y);
+            => obj.GetHashCode();
     }
 }

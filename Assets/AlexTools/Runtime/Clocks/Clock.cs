@@ -2,14 +2,15 @@
 
 namespace AlexTools.Clocks
 {
-    public abstract class Clock : IClock
+    public abstract class Clock
     {
+        public const string DefaultTimeFormat = @"mm\:ss\:fff";
+
         public float InitialTime { get; private set; }
         public float CurrentTime { get; protected set; }
         
         public bool IsTicking { get; private set; }
 
-        protected const string DefaultTimeFormat = @"mm\:ss\:fff";
         private readonly string _timeFormat;
         
         public event Action StartEvent;
@@ -94,7 +95,7 @@ namespace AlexTools.Clocks
 
         #endregion
         
-        #region Coroutine
+        #region Ticking
 
         public virtual void Tick(float deltaTime) => TickEvent?.Invoke(CurrentTime);
         private void StartTicking() => IsTicking = true;
@@ -106,10 +107,6 @@ namespace AlexTools.Clocks
         {
             TimeSpan timeSpan = TimeSpan.FromSeconds(CurrentTime);
             return timeSpan.ToString(_timeFormat);
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

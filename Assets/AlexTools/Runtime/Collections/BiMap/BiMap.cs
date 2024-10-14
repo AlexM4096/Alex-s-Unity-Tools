@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 
 namespace AlexTools.Collections
 {
@@ -148,7 +148,7 @@ namespace AlexTools.Collections
         #endregion
         
         public IEnumerator<KeyValuePair<TKey1, TKey2>> GetEnumerator() 
-            => new NoAllocEnumerator<KeyValuePair<TKey1, TKey2>>(_forward.ToArrayPooled());
+            => new Enumerator<KeyValuePair<TKey1, TKey2>>(_forward.ToList());
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

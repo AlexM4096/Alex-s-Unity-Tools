@@ -9,9 +9,7 @@ namespace AlexTools.Singleton
         public bool AutoUnParentOnAwake { get; protected set; } = true;
 
         private static T _instance;
-
-        public static bool HasInstance => _instance != null;
-        public static T TryGetInstance() => HasInstance ? _instance : null;
+        public static bool HasInstance => _instance;
 
         public static T Instance 
         {
@@ -42,16 +40,14 @@ namespace AlexTools.Singleton
             if (AutoUnParentOnAwake)
                 transform.SetParent(null);
 
-            if (!HasInstance) 
+            if (HasInstance && Instance != this)
             {
-                Instance = this as T;
-                DontDestroyOnLoad(gameObject);
-            } 
-            else 
-            {
-                if (Instance != this)
-                    Destroy(gameObject);
+                Destroy(gameObject);
+                return;
             }
+
+            Instance = this as T;
+            DontDestroyOnLoad(gameObject);
         }
     }
 }

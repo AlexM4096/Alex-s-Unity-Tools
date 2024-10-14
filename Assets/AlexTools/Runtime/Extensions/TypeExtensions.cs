@@ -8,7 +8,7 @@ namespace AlexTools.Extensions
         public static bool IsStandard(this Type type) =>
             !type.IsAbstract && !type.IsInterface && !type.IsGenericType;
         
-        static Type ResolveGeneric(this Type type) 
+        private static Type ResolveGeneric(this Type type) 
         {
             if (!type.IsGenericType) return type;
 
@@ -16,13 +16,11 @@ namespace AlexTools.Extensions
             return genericType != type ? genericType : type;
         }
         
-        static bool HasAnyInterfaces(this Type type, Type interfaceType) 
-        {
-            return type
+        public static bool HasInterface(this Type type, Type interfaceType) =>
+            type
                 .GetInterfaces()
                 .Any(t => t.ResolveGeneric() == interfaceType);
-        }
-        
+
         public static bool InheritsOrImplements(this Type type, Type baseType) 
         {
             type = type.ResolveGeneric();
@@ -30,7 +28,7 @@ namespace AlexTools.Extensions
 
             while (type != typeof(object)) 
             {
-                if (baseType == type || type.HasAnyInterfaces(baseType)) return true;
+                if (baseType == type || type.HasInterface(baseType)) return true;
                 
                 type = type.BaseType.ResolveGeneric();
                 if (type == null) return false;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AlexTools.Singleton
@@ -7,9 +8,7 @@ namespace AlexTools.Singleton
         private static readonly string Name = $"{typeof(T).Name} (Auto-Generated)";
         
         private static T _instance;
-
-        public static bool HasInstance => _instance != null;
-        public static T TryGetInstance() => HasInstance ? _instance : null;
+        public static bool HasInstance => _instance;
 
         public static T Instance 
         {

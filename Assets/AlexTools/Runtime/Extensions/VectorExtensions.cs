@@ -17,8 +17,11 @@ namespace AlexTools.Extensions
     {
         #region Convertation
         
-        public static Vector3 ToVector3(this Vector2 vector2, 
-            Orientation orientation = Orientation.X0Y, float value = 0) => orientation switch
+        public static Vector3 ToVector3(
+            this Vector2 vector2, 
+            Orientation orientation = Orientation.X0Y, 
+            float value = 0) 
+            => orientation switch
         {
             Orientation.X0Y => new Vector3(vector2.x, vector2.y, value),
             Orientation.Y0X => new Vector3(vector2.y, vector2.x, value),
@@ -29,8 +32,10 @@ namespace AlexTools.Extensions
             _ => throw new ArgumentException()
         };
 
-        public static Vector2 ToVector2(this Vector3 vector3, 
-            Orientation orientation = Orientation.X0Y) => orientation switch
+        public static Vector2 ToVector2(
+            this Vector3 vector3, 
+            Orientation orientation = Orientation.X0Y) 
+            => orientation switch
         {
             Orientation.X0Y => new Vector2(vector3.x, vector3.y),
             Orientation.Y0X => new Vector2(vector3.y, vector3.x),
@@ -41,8 +46,10 @@ namespace AlexTools.Extensions
             _ => throw new ArgumentException()
         };
         
-        public static Vector3Int ToVector3Int(this Vector2Int vector2Int, 
-            Orientation orientation = Orientation.X0Y, int value = 0) => orientation switch
+        public static Vector3Int ToVector3Int(
+            this Vector2Int vector2Int, 
+            Orientation orientation = Orientation.X0Y, 
+            int value = 0) => orientation switch
         {
             Orientation.X0Y => new Vector3Int(vector2Int.x, vector2Int.y, value),
             Orientation.Y0X => new Vector3Int(vector2Int.y, vector2Int.x, value),
@@ -53,8 +60,10 @@ namespace AlexTools.Extensions
             _ => throw new ArgumentException()
         };
         
-        public static Vector2Int ToVector2Int(this Vector3Int vector3Int, 
-            Orientation orientation = Orientation.X0Y) => orientation switch
+        public static Vector2Int ToVector2Int(
+            this Vector3Int vector3Int, 
+            Orientation orientation = Orientation.X0Y) 
+            => orientation switch
         {
             Orientation.X0Y => new Vector2Int(vector3Int.x, vector3Int.y),
             Orientation.Y0X => new Vector2Int(vector3Int.y, vector3Int.x),
@@ -65,14 +74,16 @@ namespace AlexTools.Extensions
             _ => throw new ArgumentException()
         };
 
-        public static Vector2 ToVector2(this Vector2Int vector2Int) => 
+        public static Vector2 ToVector2(
+            this Vector2Int vector2Int) => 
             new(vector2Int.x, vector2Int.y);
         public static Vector2 ToVector2(
             this Vector3Int vector3Int, 
             Orientation orientation = Orientation.X0Y) => 
             vector3Int.ToVector2Int(orientation).ToVector2();
         
-        public static Vector3 ToVector3(this Vector3Int vector3Int)
+        public static Vector3 ToVector3(
+            this Vector3Int vector3Int)
             => new(vector3Int.x, vector3Int.y, vector3Int.z);
         public static Vector3 ToVector3(
             this Vector2Int vector2Int, 
@@ -133,55 +144,101 @@ namespace AlexTools.Extensions
 
         #region Addition
 
-        public static Vector2 Add(this Vector2 vector3, float x, float y = 0) => 
+        public static Vector2 Add(
+            this Vector2 vector3, 
+            float x = 0, 
+            float y = 0) => 
             new(vector3.x + x, vector3.y + y);
 
-        public static Vector2 With(this Vector2 vector3, float? x, float? y = null) => 
+        public static Vector2 With(
+            this Vector2 vector3, 
+            float? x = null, 
+            float? y = null) => 
             new(x ?? vector3.x, y ?? vector3.y);
         
-        public static Vector2Int Add(this Vector2Int vector3Int, int x, int y = 0) => 
+        public static Vector2Int Add(
+            this Vector2Int vector3Int, 
+            int x = 0, 
+            int y = 0) => 
             new(vector3Int.x + x, vector3Int.y + y);
 
-        public static Vector2Int With(this Vector2Int vector3Int, int? x , int? y = null) => 
+        public static Vector2Int With(
+            this Vector2Int vector3Int, 
+            int? x = null, 
+            int? y = null) => 
             new(x ?? vector3Int.x, y ?? vector3Int.y);
         
-        public static Vector3 Add(this Vector3 vector3, float x, float y = 0, float z = 0) => 
+        public static Vector3 Add(
+            this Vector3 vector3, 
+            float x = 0, 
+            float y = 0, 
+            float z = 0) => 
             new(vector3.x + x, vector3.y + y, vector3.z + z);
 
-        public static Vector3 With(this Vector3 vector3, float? x, float? y = null, float? z = null) => 
+        public static Vector3 With(
+            this Vector3 vector3, 
+            float? x = null, 
+            float? y = null, 
+            float? z = null) => 
             new(x ?? vector3.x, y ?? vector3.y, z ?? vector3.z);
         
-        public static Vector3Int Add(this Vector3Int vector3Int, int x, int y = 0, int z = 0) => 
+        public static Vector3Int Add(
+            this Vector3Int vector3Int, 
+            int x = 0, 
+            int y = 0, 
+            int z = 0) => 
             new(vector3Int.x + x, vector3Int.y + y, vector3Int.z + z);
 
-        public static Vector3Int With(this Vector3Int vector3Int, int? x, int? y = null, int? z = null) => 
+        public static Vector3Int With(
+            this Vector3Int vector3Int, 
+            int? x = null, 
+            int? y = null, 
+            int? z = null) => 
             new(x ?? vector3Int.x, y ?? vector3Int.y, z ?? vector3Int.z);
 
         #endregion
 
         #region InRange
 
-        public static bool InRange(this Vector2 current, Vector2 target, float range) => 
+        public static bool InRange(
+            this Vector2 current, 
+            Vector2 target, 
+            float range) => 
             (current - target).sqrMagnitude <= range * range;
         
-        public static bool InRange(this Vector2Int current, Vector2Int target, float range) => 
+        public static bool InRange(
+            this Vector2Int current, 
+            Vector2Int target, 
+            float range) => 
             (current - target).sqrMagnitude <= range * range;
         
-        public static bool InRange(this Vector3 current, Vector3 target, float range) => 
+        public static bool InRange(
+            this Vector3 current, 
+            Vector3 target, 
+            float range) => 
             (current - target).sqrMagnitude <= range * range;
         
-        public static bool InRange(this Vector3Int current, Vector3Int target, float range) => 
+        public static bool InRange(
+            this Vector3Int current, 
+            Vector3Int target, 
+            float range) => 
             (current - target).sqrMagnitude <= range * range;
 
         #endregion
 
         #region ComponentDivision
 
-        public static Vector2 ComponentDivide(this Vector2 dividend, Vector2 divisor) => new( 
+        public static Vector2 ComponentDivide(
+            this Vector2 dividend, 
+            Vector2 divisor) 
+            => new( 
                 divisor.x != 0 ? dividend.x / divisor.x : dividend.x, 
                 divisor.y != 0 ? dividend.y / divisor.y : dividend.y);
         
-        public static Vector3 ComponentDivide(this Vector3 dividend, Vector3 divisor) => new( 
+        public static Vector3 ComponentDivide(
+            this Vector3 dividend, 
+            Vector3 divisor) 
+            => new( 
                 divisor.x != 0 ? dividend.x / divisor.x : dividend.x, 
                 divisor.y != 0 ? dividend.y / divisor.y : dividend.y, 
                 divisor.z != 0 ? dividend.z / divisor.z : dividend.z);
@@ -190,16 +247,30 @@ namespace AlexTools.Extensions
 
         #region Scale
 
-        public static Vector2 Scale(this Vector2 vector2, float x, float y = 1) => 
+        public static Vector2 Scale(
+            this Vector2 vector2, 
+            float x = 1, 
+            float y = 1) => 
             new(vector2.x * x, vector2.y * y);
         
-        public static Vector2Int Scale(this Vector2Int vector2Int, int x, int y = 1) => 
+        public static Vector2Int Scale(
+            this Vector2Int vector2Int, 
+            int x = 1, 
+            int y = 1) => 
             new(vector2Int.x * x, vector2Int.y * y);
         
-        public static Vector3 Scale(this Vector3 vector3, float x, float y = 1, float z = 1) => 
+        public static Vector3 Scale(
+            this Vector3 vector3, 
+            float x = 1, 
+            float y = 1, 
+            float z = 1) => 
             new(vector3.x * x, vector3.y * y, vector3.z * z);
         
-        public static Vector3Int Scale(this Vector3Int vector3Int, int x, int y = 1, int z = 1) => 
+        public static Vector3Int Scale(
+            this Vector3Int vector3Int, 
+            int x = 1, 
+            int y = 1, 
+            int z = 1) => 
             new(vector3Int.x * x, vector3Int.y * y, vector3Int.z * z);
 
         #endregion

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace AlexTools.Collections
@@ -92,7 +91,7 @@ namespace AlexTools.Collections
         public void AssignValues(Func<Vector2Int, T> func) => 
             ForEach(position => this[position] = func(position));
 
-        public IEnumerator<T> GetEnumerator() => new NoAllocEnumerator<T>(_array);
+        public IEnumerator<T> GetEnumerator() => new Enumerator<T>(_array);
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }    

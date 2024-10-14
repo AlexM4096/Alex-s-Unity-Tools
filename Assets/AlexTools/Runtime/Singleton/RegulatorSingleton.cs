@@ -8,7 +8,7 @@ namespace AlexTools.Singleton
         
         private static T _instance;
 
-        public static bool HasInstance => _instance != null;
+        public static bool HasInstance => _instance;
 
         public float InitializationTime { get; private set; }
 
@@ -49,8 +49,7 @@ namespace AlexTools.Singleton
                     Destroy(oldInstance.gameObject);
             }
 
-            if (!HasInstance) 
-                Instance = this as T;
+            if (!HasInstance) Instance = this as T;
         }
     }
 }

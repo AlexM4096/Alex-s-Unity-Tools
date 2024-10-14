@@ -5,11 +5,14 @@ namespace AlexTools.Extensions
 {
     public static class NumberExtensions 
     {
-        public static float Divide(this int part, int whole)
+        public static float DivideBy(this int part, int whole)
         {    
             if (whole == 0) return float.NaN;
             return (float) part / whole;
         }
+        
+        public static bool IsOdd(this int i) => i % 2 == 1;
+        public static bool IsEven(this int i) => i % 2 == 0;
 
         public static int AtLeast(this int value, int min) => Mathf.Max(value, min);
         public static int AtMost(this int value, int max) => Mathf.Min(value, max);
