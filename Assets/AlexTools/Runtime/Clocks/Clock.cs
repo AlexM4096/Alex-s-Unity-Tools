@@ -2,7 +2,7 @@
 
 namespace AlexTools.Clocks
 {
-    public abstract class Clock
+    public abstract class Clock : IFormattable
     {
         public const string DefaultTimeFormat = @"mm\:ss\:fff";
 
@@ -11,7 +11,7 @@ namespace AlexTools.Clocks
         
         public bool IsTicking { get; private set; }
 
-        private readonly string _timeFormat;
+        public string TimeFormat { get; set; }
         
         public event Action StartEvent;
         public event Action StopEvent;
@@ -19,14 +19,14 @@ namespace AlexTools.Clocks
         public event Action PauseEvent;
         public event Action ResumeEvent;
         
-        public event Action<float> TickEvent; 
+        public event Action<Clock> TickEvent; 
 
         protected Clock(float initialTime, string timeFormat = DefaultTimeFormat)
         {
             InitialTime = initialTime;
             CurrentTime = initialTime;
 
-            _timeFormat = timeFormat;
+            TimeFormat = timeFormat;
         }
 
         #region MainMethods
@@ -97,16 +97,22 @@ namespace AlexTools.Clocks
         
         #region Ticking
 
-        public virtual void Tick(float deltaTime) => TickEvent?.Invoke(CurrentTime);
+        public virtual void Tick(float deltaTime) => TickEvent?.Invoke(this);
         private void StartTicking() => IsTicking = true;
         private void StopTicking() => IsTicking = false;
 
         #endregion
-
+        
         public override string ToString()
         {
-            TimeSpan timeSpan = TimeSpan.FromSeconds(CurrentTime);
-            return timeSpan.ToString(_timeFormat);
+            var timeSpan = TimeSpan.FromSeconds(CurrentTime);
+            return timeSpan.ToString(TimeFormat);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            var timeSpan = TimeSpan.FromSeconds(CurrentTime);
+            return timeSpan.ToString(format, formatProvider);
         }
     }
 }

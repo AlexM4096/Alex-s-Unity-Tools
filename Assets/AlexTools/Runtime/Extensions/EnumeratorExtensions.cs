@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 namespace AlexTools.Extensions
@@ -12,6 +11,7 @@ namespace AlexTools.Extensions
                 yield return enumerator.Current;
         }
 
-        public static Func<bool> AsPredicate(this IEnumerator coroutine) => coroutine.MoveNext;
+        public static bool AsPredicate<T>(this IEnumerator<T> enumerator) => enumerator.MoveNext();
+        public static bool AsPredicateO(this IEnumerator enumerator) => enumerator.MoveNext();
     }
 }

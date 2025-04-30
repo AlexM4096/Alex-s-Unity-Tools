@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using AlexTools.Attributes;
 using UnityEngine;
 
-namespace AlexTools
+namespace AlexTools.Tests.Editor
 {
     [CreateAssetMenu]
     public class SceneHandler : ScriptableObject
     {
-        [SerializeField] [ScenePath]
+        [SerializeField, ScenePath]
         private string scene;
 
-        [SerializeField] [ScenePath]
+        [SerializeField, ScenePath]
         private List<string> listOfScenes;
 
         private void OnValidate()

@@ -5,14 +5,13 @@ namespace AlexTools.Extensions
 {
     public static class NumberExtensions 
     {
-        public static float DivideBy(this int part, int whole)
-        {    
-            if (whole == 0) return float.NaN;
-            return (float) part / whole;
+        public static float DivideBy(this int dividend, int divisor)
+        {
+            if (divisor == 0) throw new ArgumentException("Dividend can not be equal zero!!!");
+            return (float) dividend / divisor;
         }
-        
-        public static bool IsOdd(this int i) => i % 2 == 1;
-        public static bool IsEven(this int i) => i % 2 == 0;
+
+        #region Least&Most
 
         public static int AtLeast(this int value, int min) => Mathf.Max(value, min);
         public static int AtMost(this int value, int max) => Mathf.Min(value, max);
@@ -25,5 +24,7 @@ namespace AlexTools.Extensions
         
         public static decimal AtLeast(this decimal value, decimal min) => Math.Max(value, min);
         public static decimal AtMost(this decimal value, decimal min) => Math.Min(value, min);
+
+        #endregion
     }
 }

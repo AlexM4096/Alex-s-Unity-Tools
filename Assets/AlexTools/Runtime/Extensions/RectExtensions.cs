@@ -4,12 +4,19 @@ namespace AlexTools.Extensions
 {
     public static class RectExtensions
     {
+        public static Rect WithPosition(this Rect rect, Vector2 position)
+        {
+            rect.position = position;
+            return rect;
+        }
+            
+        
         #region Scale
 
         public static Rect Scale(this Rect rect, float scale) 
             => new(rect.position * scale, rect.size * scale);
         
-        public static Rect Scale(this Rect rect, float scaleX, float scaleY) 
+        public static Rect Scale(this Rect rect, float scaleX = 1, float scaleY = 1) 
             => new(rect.position.Scale(scaleX, scaleY), rect.size.Scale(scaleX, scaleY));
         
         public static Rect Scale(this Rect rect, Vector2 scale) 
@@ -18,7 +25,7 @@ namespace AlexTools.Extensions
         public static RectInt Scale(this RectInt rectInt, int scale) 
             => new(rectInt.position * scale, rectInt.size * scale);
         
-        public static RectInt Scale(this RectInt rectInt, int scaleX, int scaleY) 
+        public static RectInt Scale(this RectInt rectInt, int scaleX = 1, int scaleY = 1) 
             => new(rectInt.position.Scale(scaleX, scaleY), rectInt.size.Scale(scaleX, scaleY));
         
         public static RectInt Scale(this RectInt rectInt, Vector2Int scale) 
@@ -56,10 +63,10 @@ namespace AlexTools.Extensions
 
         #endregion
 
-        public static Rect Centralize(this Rect rect) 
-            => new(rect.position - rect.size / 2, rect.size);
+        public static Rect Centralize(this Rect rect) => 
+            new(rect.position - rect.size / 2, rect.size);
         
-        public static RectInt Centralize(this RectInt rectInt) 
-            => new(rectInt.position - rectInt.size / 2, rectInt.size);
+        public static RectInt Centralize(this RectInt rectInt) => 
+            new(rectInt.position - rectInt.size / 2, rectInt.size);
     }
 }

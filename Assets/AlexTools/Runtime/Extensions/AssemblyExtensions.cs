@@ -7,11 +7,6 @@ namespace AlexTools.Extensions
 {
     public static class AssemblyExtensions
     {
-        public static IEnumerable<Type> GetAllTypes() =>
-            AppDomain.CurrentDomain
-                .GetAssemblies()
-                .SelectMany(a => a.GetTypes());
-
         public static IEnumerable<Type> GetEnums(this Assembly assembly) => 
             assembly
                 .GetTypes()

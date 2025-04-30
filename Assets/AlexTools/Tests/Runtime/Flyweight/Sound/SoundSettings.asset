@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d316afa43a546789cc0ee055b0bb62d, type: 3}
+  m_Name: SoundSettings
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 795866694484233462, guid: 3561c78813e2fd84ea1a9c558aab8cb9, type: 3}
+  flyweightType:
+    assemblyQualifiedName: AlexTools.Tests.Runtime.Flyweight.Sound, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  preloadAmount: 8
+  collectionCheck: 1
+  defaultCapacity: 32
+  maxSize: 64
+  sounds:
+  - type: 1
+    variations:
+    - {fileID: 8300000, guid: 39ce5b23dbc42324fac9e21f0acffa06, type: 3}
+  - type: 0
+    variations:
+    - {fileID: 8300000, guid: 1f9bcaf5ee9e2844fadd87553c83022e, type: 3}
+  - type: 2
+    variations:
+    - {fileID: 8300000, guid: 6c03c2c2ce7125948b4810b8ffc4a310, type: 3}

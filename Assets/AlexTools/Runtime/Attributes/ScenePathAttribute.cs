@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AlexTools
+namespace AlexTools.Attributes
 {
     public class ScenePathAttribute : PropertyAttribute
     {

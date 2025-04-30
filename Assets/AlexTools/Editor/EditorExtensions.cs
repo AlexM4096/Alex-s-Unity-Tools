@@ -4,17 +4,12 @@ namespace AlexTools
 {
     public static class EditorExtensions
     {
-        private const string AutoPropertyFormat = "<{0}>k__BackingField";
-
-        private static string GetAutoPropertyPath(string name) => 
-            string.Format(AutoPropertyFormat, name);
+        private static string GetAutoPropertyPath(string name) => string.Format(StringFormat.AutoProperty, name);
         
-        public static SerializedProperty FindAutoPropertyRelative(
-            this SerializedProperty property, string name) =>
+        public static SerializedProperty FindAutoPropertyRelative(this SerializedProperty property, string name) =>
             property.FindPropertyRelative(GetAutoPropertyPath(name));
         
-        public static SerializedProperty FindAutoProperty(
-            this SerializedObject obj, string name) =>
+        public static SerializedProperty FindAutoProperty(this SerializedObject obj, string name) =>
             obj.FindProperty(GetAutoPropertyPath(name));
     }
 }

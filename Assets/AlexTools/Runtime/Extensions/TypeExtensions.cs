@@ -10,7 +10,7 @@ namespace AlexTools.Extensions
         
         private static Type ResolveGeneric(this Type type) 
         {
-            if (!type.IsGenericType) return type;
+            if (type is not { IsGenericType: true }) return type;
 
             var genericType = type.GetGenericTypeDefinition();
             return genericType != type ? genericType : type;
@@ -19,7 +19,7 @@ namespace AlexTools.Extensions
         public static bool HasInterface(this Type type, Type interfaceType) =>
             type
                 .GetInterfaces()
-                .Any(t => t.ResolveGeneric() == interfaceType);
+                .Any(i => i.ResolveGeneric() == interfaceType);
 
         public static bool InheritsOrImplements(this Type type, Type baseType) 
         {
@@ -39,8 +39,17 @@ namespace AlexTools.Extensions
 
         public static bool TryGetType(this string typeName, out Type type)
         {
+            if (typeName.IsNullOrEmpty())
+            {
+                type = default;
+                return false;
+            }
+            
             type = Type.GetType(typeName);
-            return type != null || !string.IsNullOrEmpty(typeName);
+            return type != null;
         }
+
+        public static string GetReflectedName(this Type type, string format = "{1} (from {0})") =>
+            type.ReflectedType == null ? type.Name : string.Format(format, type.ReflectedType.Name, type.Name);
     }
 }

@@ -142,59 +142,51 @@ namespace AlexTools.Extensions
 
         #endregion
 
-        #region Addition
+        #region Add
 
-        public static Vector2 Add(
-            this Vector2 vector3, 
-            float x = 0, 
-            float y = 0) => 
+        public static Vector2 Add(this Vector2 vector3, 
+            float x = 0, float y = 0) => 
             new(vector3.x + x, vector3.y + y);
-
-        public static Vector2 With(
-            this Vector2 vector3, 
-            float? x = null, 
-            float? y = null) => 
-            new(x ?? vector3.x, y ?? vector3.y);
         
-        public static Vector2Int Add(
-            this Vector2Int vector3Int, 
-            int x = 0, 
-            int y = 0) => 
+        public static Vector2Int Add(this Vector2Int vector3Int, 
+            int x = 0, int y = 0) => 
             new(vector3Int.x + x, vector3Int.y + y);
-
-        public static Vector2Int With(
-            this Vector2Int vector3Int, 
-            int? x = null, 
-            int? y = null) => 
-            new(x ?? vector3Int.x, y ?? vector3Int.y);
         
-        public static Vector3 Add(
-            this Vector3 vector3, 
-            float x = 0, 
-            float y = 0, 
-            float z = 0) => 
+        public static Vector3 Add(this Vector3 vector3, 
+            float x = 0, float y = 0, float z = 0) => 
             new(vector3.x + x, vector3.y + y, vector3.z + z);
-
-        public static Vector3 With(
-            this Vector3 vector3, 
-            float? x = null, 
-            float? y = null, 
-            float? z = null) => 
-            new(x ?? vector3.x, y ?? vector3.y, z ?? vector3.z);
         
-        public static Vector3Int Add(
-            this Vector3Int vector3Int, 
-            int x = 0, 
-            int y = 0, 
-            int z = 0) => 
+        public static Vector3Int Add(this Vector3Int vector3Int, 
+            int x = 0, int y = 0, int z = 0) => 
             new(vector3Int.x + x, vector3Int.y + y, vector3Int.z + z);
 
-        public static Vector3Int With(
-            this Vector3Int vector3Int, 
-            int? x = null, 
-            int? y = null, 
-            int? z = null) => 
+        public static Vector4 Add(this Vector4 vector4,
+            float x = 0, float y = 0, float z = 0, float w = 0) =>
+            new(vector4.x + x, vector4.y + y, vector4.z + z, vector4.w + w);
+
+        #endregion
+
+        #region With
+
+        public static Vector2 With(this Vector2 vector3, 
+            float? x = null, float? y = null) => 
+            new(x ?? vector3.x, y ?? vector3.y);
+        
+        public static Vector2Int With(this Vector2Int vector3Int, 
+            int? x = null, int? y = null) => 
+            new(x ?? vector3Int.x, y ?? vector3Int.y);
+        
+        public static Vector3 With(this Vector3 vector3, 
+            float? x = null, float? y = null, float? z = null) => 
+            new(x ?? vector3.x, y ?? vector3.y, z ?? vector3.z);
+        
+        public static Vector3Int With(this Vector3Int vector3Int, 
+            int? x = null, int? y = null, int? z = null) => 
             new(x ?? vector3Int.x, y ?? vector3Int.y, z ?? vector3Int.z);
+        
+        public static Vector4 With(this Vector4 vector4,
+            float? x = null, float? y = null, float? z = null, float? w = null) =>
+            new(x ?? vector4.x, y ?? vector4.y, z ?? vector4.z, w ?? vector4.w);
 
         #endregion
 
@@ -275,5 +267,15 @@ namespace AlexTools.Extensions
 
         #endregion
 
+        public static Vector2 Rotate(this Vector2 vector, float angel)
+        {
+            var cos = Mathf.Cos(angel);
+            var sin = Mathf.Sin(angel);
+
+            var x = vector.x * cos - vector.y * sin;
+            var y = vector.x * sin + vector.y * cos;
+
+            return new Vector2(x, y);
+        }
     }
 }

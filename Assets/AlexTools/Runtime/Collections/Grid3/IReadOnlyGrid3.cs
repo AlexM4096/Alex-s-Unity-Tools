@@ -1,9 +1,9 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AlexTools.Collections
 {
-    public interface IReadOnlyGrid3<out T>
+    public interface IReadOnlyGrid3<out T> : IEnumerable<T>
     {
         int Width { get; }
         int Height { get; }
@@ -24,11 +24,5 @@ namespace AlexTools.Collections
         
         bool InBounds(int x, int y, int z);
         bool InBounds(Vector3Int position);
-
-        void ForEach(Action<int, int, int> action);
-        void ForEach(Action<Vector3Int> action);
-        
-        void ForEach(Action<int, int, int, T> action);
-        void ForEach(Action<Vector3Int, T> action);
     }
 }

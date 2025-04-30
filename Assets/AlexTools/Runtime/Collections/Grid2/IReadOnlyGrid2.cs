@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace AlexTools.Collections
@@ -24,11 +23,5 @@ namespace AlexTools.Collections
         
         bool InBounds(int x, int y);
         bool InBounds(Vector2Int position);
-
-        void ForEach(Action<int, int> action);
-        void ForEach(Action<Vector2Int> action);
-        
-        void ForEach(Action<int, int, T> action);
-        void ForEach(Action<Vector2Int, T> action);
     }
 }
