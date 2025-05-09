@@ -2,7 +2,6 @@
 
 #if ZSTRING_INSTALLED
 using Cysharp.Text;
-using TMPro;
 #endif
 
 namespace AlexTools.Extensions

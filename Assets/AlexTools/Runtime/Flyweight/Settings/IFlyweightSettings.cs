@@ -1,5 +1,4 @@
-﻿using AlexTools.Extensions;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AlexTools.Flyweight
 {
@@ -13,8 +12,8 @@ namespace AlexTools.Flyweight
 
         MonoFlyweight Create();
 
-        public void OnGet(MonoFlyweight flyweight) => flyweight.gameObject.Enable();
-        public void OnRelease(MonoFlyweight flyweight) => flyweight.gameObject.Disable();
+        public void OnGet(MonoFlyweight flyweight) => flyweight.gameObject.SetActive(true);
+        public void OnRelease(MonoFlyweight flyweight) => flyweight.gameObject.SetActive(false);
         public void OnDestroy(MonoFlyweight flyweight) => Object.Destroy(flyweight.gameObject);
     }
 }
