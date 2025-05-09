@@ -1,0 +1,13 @@
+{
+  "name": "com.alexm4096.alex-unity-tools",
+  "version": "0.0.1",
+  "displayName": "Alex's Unity Tools",
+  "description": "My every day tools for Unity",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "author": {
+    "name": "AlexM4096",
+    "email": "alex.m.game.jam@gmail.com",
+    "url": "https://github.com/AlexM4096"
+  }
+}
