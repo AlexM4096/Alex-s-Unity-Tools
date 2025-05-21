@@ -1,13 +1,12 @@
 ﻿namespace AlexTools.Hash
 {
-    public sealed class FNV1aHash : IHash
+    public delegate int HashFunc(string key);
+    
+    public static class Hash
     {
-        private static readonly FNV1aHash instance = new();
-        public static FNV1aHash Instance => instance;
+        public static HashFunc DefaultFunc { get; set; } = FNV1aHash;
         
-        private FNV1aHash(){}
-            
-        public int Hash(string str)
+        public static int FNV1aHash(string str)
         {
             var hash = 2166136261;
 

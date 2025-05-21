@@ -266,7 +266,7 @@ namespace AlexTools.Extensions
             new(vector3Int.x * x, vector3Int.y * y, vector3Int.z * z);
 
         #endregion
-
+        
         public static Vector2 Rotate(this Vector2 vector, float angel)
         {
             var cos = Mathf.Cos(angel);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AlexTools.Extensions;
@@ -15,6 +16,24 @@ namespace AlexTools.Random
         public static IRandom OrUnity(this IRandom random) => random ?? UnityRandom.Instance;
         public static IRandom OrSystem(this IRandom random) => random ?? new SystemRandom();
 
+        #region Collection&List
+
+        public static int GetIndex<T>(this IRandom random, ICollection<T> collection) =>
+            random.GetInt(0, collection.Count);
+        public static int GetIndexR<T>(this IRandom random, IReadOnlyCollection<T> collection) =>
+            random.GetInt(0, collection.Count);
+        public static int GetIndexO(this IRandom random, ICollection collection) =>
+            random.GetInt(0, collection.Count);
+
+        public static T GetItem<T>(this IRandom random, IList<T> list) =>
+            list[GetIndex(random, list)];
+        public static T GetItemR<T>(this IRandom random, IReadOnlyList<T> list) =>
+            list[GetIndexR(random, list)];
+        public static object GetObject(this IRandom random, IList list) =>
+            list[GetIndexO(random, list)];
+
+        #endregion
+        
         #region Bool
 
         public static bool GetBool(this IRandom random, float chance = 0.5f) => random.GetFloat() < chance;
@@ -32,7 +51,7 @@ namespace AlexTools.Random
         #region Enum
 
         public static T GetEnum<T>(this IRandom random) where T : struct, Enum =>
-            Utils.GetValues<T>().Random(random);
+            EnumUtils.GetValues<T>().Random(random);
 
         public static T GetEnum<T>(this IRandom random, params T[] variants) where T : struct, Enum =>
             variants.GetRandomItem(random);
@@ -52,7 +71,7 @@ namespace AlexTools.Random
             if (!type.HasCustomAttribute<FlagsAttribute>())
                 throw new ArgumentException();
 
-            var values = Utils.GetValues<T>().Select(x => Convert.ToInt32(x)).ToArray();
+            var values = EnumUtils.GetValues<T>().Select(x => Convert.ToInt32(x)).ToArray();
             var amount = values.GetRandomIndex(random);
             var value = values
                 .Take(amount)
@@ -61,6 +80,34 @@ namespace AlexTools.Random
             return (T)Enum.ToObject(type, value);
         }
         
+        #endregion
+
+        #region Char&String
+
+        private static readonly char[] Alphanumeric = (
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + 
+            "abcdefghijklmnopqrstuvwxyz" + 
+            "0123456789"
+        ).ToCharArray();
+
+        public static char GetChar(this IRandom random, bool alphanumeric = true) =>
+            alphanumeric ? 
+                GetItem(random, Alphanumeric) : 
+                (char)random.GetInt(0, 256);
+        
+        public static string GetString(
+            this IRandom random, 
+            int length = 16, 
+            bool alphanumeric = true)
+        {
+            var array = new char[length];
+
+            for (var i = 0; i < length; i++)
+                array[i] = GetChar(random, alphanumeric);
+
+            return new string(array);
+        }
+
         #endregion
         
         #region Color

@@ -10,12 +10,12 @@ namespace AlexTools.Blackboard
         private readonly Dictionary<string, StringKey> _keyRegistry = new();
         private readonly Dictionary<StringKey, BlackboardEntry> _entries = new();
 
-        private readonly IHash _hash;
+        private readonly HashFunc _hashFunc;
 
-        public Blackboard(IHash hash = null) => _hash = hash.OrDefault();
+        public Blackboard(HashFunc hashFunc = null) => _hashFunc = hashFunc.OrDefault();
 
         public StringKey GetOrRegisterKey(string name) => _keyRegistry.GetOrAdd(name, CreateKey);
-        private StringKey CreateKey(string name) => new(name, _hash);
+        private StringKey CreateKey(string name) => new(name, _hashFunc);
         
         public void Set<T>(StringKey key, T value) => _entries[key] = new BlackboardEntry<T>(key, value);
         public T Get<T>(StringKey key) => _entries[key].Cast<T>().Value;

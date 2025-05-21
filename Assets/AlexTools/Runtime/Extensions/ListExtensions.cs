@@ -61,7 +61,7 @@ namespace AlexTools.Extensions
         #region Random
 
         public static T GetRandomItem<T>(this IList<T> list, IRandom random = null) =>
-            list[list.GetRandomIndex(random)];
+            random.OrDefault().GetItem(list);
         public static bool TryGetRandomItem<T>(this IList<T> list, out T item, IRandom random = null)
         {
             if (list.IsEmptyOrNull())
@@ -75,7 +75,7 @@ namespace AlexTools.Extensions
         }
         
         public static T GetRandomItemR<T>(this IReadOnlyList<T> list, IRandom random = null) =>
-            list[list.GetRandomIndexR(random)];
+            random.OrDefault().GetItemR(list);
         public static bool GetRandomItemR<T>(this IReadOnlyList<T> list, out T item, IRandom random = null)
         {
             if (list.IsEmptyOrNullR())
@@ -89,7 +89,7 @@ namespace AlexTools.Extensions
         }
 
         public static object GetRandomObject(this IList list, IRandom random = null) =>
-            list[list.GetRandomIndexO(random)];
+            random.OrDefault().GetObject(list);
         public static bool TryGetRandomObject(this IList list, out object item, IRandom random = null)
         {
             if (list.IsEmptyOrNullO())

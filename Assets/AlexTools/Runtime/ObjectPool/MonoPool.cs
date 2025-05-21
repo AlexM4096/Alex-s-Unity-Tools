@@ -1,46 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using AlexTools.Extensions;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
-namespace AlexTools
+namespace AlexTools.ObjectPool
 {
-    public class MonoPool<T> : IDisposable, IObjectPool<T> where T : MonoBehaviour
+    public class MonoPool<T> : 
+        IDisposable, 
+        IObjectPool<T> 
+        where T : MonoBehaviour
     {
-        public const int DefaultCapacity = 8;
-        
         private readonly T _prefab;
         private readonly Transform _origin;
+        
+        private readonly bool _resize;
         private readonly List<T> _list;
 
         public int CountInactive => _list.Count;
 
-        public MonoPool(T prefab, Transform origin = null, int capacity = DefaultCapacity)
+        public MonoPool(
+            T prefab, 
+            Transform origin = null, 
+            int capacity = 8,
+            bool resize = true
+        )
         {
             _prefab = prefab;
             _origin = origin;
+            
+            _resize = resize;
             _list = new List<T>(capacity);
         }
 
         private T Create() => Object.Instantiate(_prefab, _origin);
-        private static void OnGet(T obj) => obj.gameObject.SetActive(true);
-        private static void OnRelease(T obj) => obj.gameObject.SetActive(false);
+        private static void OnGet(T obj) => obj.gameObject.Enable();
+        private static void OnRelease(T obj) => obj.gameObject.Disable();
         private static void OnDestroy(T obj) => Object.Destroy(obj);
 
         public T Get()
         {
-            T obj;
-            
-            if (_list.Count == 0)
-                obj = Create();
-            else
-            {
-                var index = _list.Count - 1;
-                obj = _list[index];
-                _list.RemoveAt(index);
-            }
-            
+            if (!_list.TryPop(out var obj)) obj = Create();
             OnGet(obj);
             return obj;
         }
@@ -51,7 +52,7 @@ namespace AlexTools
         {
             OnRelease(element);
             
-            if (CountInactive < _list.Capacity)
+            if (_resize || CountInactive < _list.Capacity)
                 _list.Add(element);
             else
                 OnDestroy(element);
@@ -63,6 +64,7 @@ namespace AlexTools
                 OnDestroy(obj);
             
             _list.Clear();
+            if (_resize) _list.TrimExcess();
         }
 
         public void Dispose() => Clear();

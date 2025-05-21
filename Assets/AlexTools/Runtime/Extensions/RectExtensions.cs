@@ -9,6 +9,9 @@ namespace AlexTools.Extensions
             rect.position = position;
             return rect;
         }
+
+        public static RectInt ToRectInt(this Rect rect) => 
+            new(rect.position.RoundVector2(), rect.size.RoundVector2());
             
         
         #region Scale
@@ -30,6 +33,17 @@ namespace AlexTools.Extensions
         
         public static RectInt Scale(this RectInt rectInt, Vector2Int scale) 
             => new(rectInt.position * scale, rectInt.size * scale);
+
+        #endregion
+
+        #region CanvasScale
+
+        public static Rect Scale(this Rect rect, Canvas canvas)
+        {
+            var size = rect.size / canvas.scaleFactor;
+            var position = rect.position + (rect.size - size) / 2;
+            return new Rect(position, size);
+        }
 
         #endregion
 

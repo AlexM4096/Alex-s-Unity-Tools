@@ -1,6 +1,4 @@
-﻿using AlexTools.Hash;
-
-#if ZSTRING_INSTALLED
+﻿#if ZSTRING_INSTALLED
 using Cysharp.Text;
 #endif
 
@@ -13,8 +11,6 @@ namespace AlexTools.Extensions
         public static bool IsNullOrWhiteSpace(this string str) => string.IsNullOrWhiteSpace(str);
         public static bool IsNullOrEmpty(this string str) => string.IsNullOrEmpty(str);
         public static bool IsNullOrBlank(this string str) => str.IsNullOrEmpty() || str.IsNullOrWhiteSpace();
-
-        public static int Hash(this string str, IHash hash = null) => hash.OrDefault().Hash(str);
         
         #region RichText
         

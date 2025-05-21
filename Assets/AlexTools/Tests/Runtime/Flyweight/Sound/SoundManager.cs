@@ -24,9 +24,6 @@ namespace AlexTools.Tests.Runtime.Flyweight
             _factory = new FlyweightFactory();
             _random = _random.OrDefault();
             
-            print(_random.RollDice(_dice));
-            print(Utils.GetValues<Dice>().Count());
-            
             var routine = PlayRandomSounds().Start(this);
         }
 

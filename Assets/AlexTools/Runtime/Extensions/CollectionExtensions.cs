@@ -31,11 +31,11 @@ namespace AlexTools.Extensions
         #region Random
 
         public static int GetRandomIndex<T>(this ICollection<T> collection, IRandom random = null) => 
-            random.OrDefault().GetInt(0, collection.Count);
+            random.OrDefault().GetIndex(collection);
         public static int GetRandomIndexO(this ICollection collection, IRandom random = null) => 
-            random.OrDefault().GetInt(0, collection.Count);
+            random.OrDefault().GetIndexO(collection);
         public static int GetRandomIndexR<T>(this IReadOnlyCollection<T> collection, IRandom random = null) => 
-            random.OrDefault().GetInt(0, collection.Count);
+            random.OrDefault().GetIndexR(collection);
 
         #endregion
     }

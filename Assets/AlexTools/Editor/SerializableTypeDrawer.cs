@@ -19,7 +19,7 @@ namespace AlexTools
             
             var filter = fieldInfo.TryGetCustomAttribute(out TypeFilterAttribute filterAttribute) ? 
                 filterAttribute.Filter : DefaultFilter;
-            var types = Utils.GetAllTypes().Where(filter).ToArray();
+            var types = ReflectionUtils.GetAllTypes().Where(filter).ToArray();
                 
             _typeNames = types.Select(t => t.GetReflectedName()).ToArray();
             _typeFullNames = types.Select(t => t.AssemblyQualifiedName).ToArray();

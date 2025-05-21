@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AlexTools.ObjectPool;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -38,8 +39,9 @@ namespace AlexTools.Extensions
         public static MonoPool<T> CreatePool<T>(
             this T prefab,
             Transform origin = null, 
-            int capacity = 8) 
+            int capacity = 8,
+            bool resize = true) 
             where T : MonoBehaviour => 
-            new(prefab, origin, capacity);
+            new(prefab, origin, capacity, resize);
     }
 }

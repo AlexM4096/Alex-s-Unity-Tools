@@ -104,10 +104,14 @@ namespace AlexTools.Extensions
 
         #region Random
 
-        private static bool TryCastRandom<T>([NoEnumeration] IEnumerable<T> enumerable, IRandom random, out T value)
+        private static bool TryCastRandom<T>(
+            [NoEnumeration] IEnumerable<T> enumerable, 
+            IRandom random, 
+            out T value
+        )
         {
             if (enumerable == null)
-                throw new Exception();
+                throw new NullReferenceException();
             
             value = default;
             
@@ -127,7 +131,10 @@ namespace AlexTools.Extensions
             }
         }
         
-        public static T Random<T>(this IEnumerable<T> enumerable, IRandom random = null)
+        public static T Random<T>(
+            this IEnumerable<T> enumerable, 
+            IRandom random = null
+        )
         {
             if (TryCastRandom(enumerable, random, out var value)) 
                 return value;
@@ -143,14 +150,17 @@ namespace AlexTools.Extensions
 
             while (enumerator.MoveNext())
             {
-                if (random.GetBool(++count)) continue;
-                value = enumerator.Current;
+                if (random.GetBool(++count))
+                    value = enumerator.Current;
             }
 
             return value;
         }
         
-        public static T RandomOrDefault<T>(this IEnumerable<T> enumerable, IRandom random = null)
+        public static T RandomOrDefault<T>(
+            this IEnumerable<T> enumerable, 
+            IRandom random = null
+        )
         {
             if (TryCastRandom(enumerable, random, out var value)) 
                 return value;
@@ -160,29 +170,38 @@ namespace AlexTools.Extensions
 
             foreach (var item in enumerable)
             {
-                if (random.GetBool(++count)) continue;
-                value = item;
+                if (random.GetBool(++count))
+                    value = item;
             }
 
             return value;
         }
-        
-        // public static T? RandomOrNull<T>(this IEnumerable<T> enumerable, IRandom random = null) where T : struct
-        // {
-        //     if (TryRandom(enumerable, random, out var value)) 
-        //         return value;
-        //     
-        //     random = random.OrDefault();
-        //     var count = 0;
-        //
-        //     foreach (var item in enumerable)
-        //     {
-        //         if (random.GetBool(++count)) continue;
-        //         value = item;
-        //     }
-        //
-        //     return value;
-        // }
+
+        public static bool TryRandom<T>(
+            this IEnumerable<T> enumerable,
+            out T value,
+            IRandom random = null
+        )
+        {
+            if (TryCastRandom(enumerable, random, out value))
+                return true;
+            
+            using var enumerator = enumerable.GetEnumerator();
+            if (!enumerator.MoveNext()) return false;
+            
+            random = random.OrDefault();
+            
+            value = enumerator.Current;
+            var count = 1;
+
+            while (enumerator.MoveNext())
+            {
+                if (random.GetBool(++count))
+                    value = enumerator.Current;
+            }
+
+            return true;
+        }
 
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> enumerable, IRandom random = null)
         {

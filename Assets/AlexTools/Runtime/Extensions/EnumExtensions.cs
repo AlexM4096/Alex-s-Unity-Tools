@@ -8,7 +8,7 @@ namespace AlexTools.Extensions
     public static class EnumExtensions
     {
         public static IEnumerable<T> GetFlags<T>(this T @enum) where T : struct, Enum => 
-            Utils.GetValues<T>().Where(flag => @enum.HasFlag(flag));
+            EnumUtils.GetValues<T>().Where(flag => @enum.HasFlag(flag));
 
         #region Random
 
