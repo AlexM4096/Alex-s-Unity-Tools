@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
 namespace AlexTools.Extensions
 {
@@ -40,8 +41,8 @@ namespace AlexTools.Extensions
             var screenshot = new Texture2D(
                 renderTexture.width,
                 renderTexture.width,
-                (TextureFormat)renderTexture.format,
-                true
+                renderTexture.graphicsFormat,
+                TextureCreationFlags.None
             );
             Graphics.CopyTexture(renderTexture, screenshot);
             return screenshot;
