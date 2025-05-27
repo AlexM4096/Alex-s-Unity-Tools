@@ -96,7 +96,7 @@ namespace AlexTools.Extensions
 
             var origin = GameObject.Find(names.First())?.transform;
             
-            if (origin.IsNull())
+            if (origin)
             {
                 
                 return null;
@@ -108,7 +108,7 @@ namespace AlexTools.Extensions
                 var name = names[i];
                 
                 origin = origin.Children().FirstOrDefault(x => x.name == name);
-                if (origin.IsNotNull()) continue;
+                if (origin) continue;
                 
                 
                 return null;

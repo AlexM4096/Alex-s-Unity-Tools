@@ -13,10 +13,10 @@ namespace AlexTools.Extensions
         #region Random
 
         public static T OrRandom<T>(this T? @enum, IRandom random = null) where T : struct, Enum => 
-            @enum ?? random.GetEnum<T>();
+            @enum ?? random.OrDefault().GetEnum<T>();
 
         public static T OrRandomFlags<T>(this T? @enum, IRandom random = null) where T : struct, Enum => 
-            @enum ?? random.GetEnumWithFlags<T>();
+            @enum ?? random.OrDefault().GetEnumWithFlags<T>();
 
         #endregion
     }

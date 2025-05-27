@@ -13,9 +13,9 @@ namespace AlexTools.Extensions
 
         public static void Reset(this Transform transform)
         {
-            transform.ResetPosition();
-            transform.ResetRotation();
-            transform.ResetScale();
+            ResetPosition(transform);
+            ResetRotation(transform);
+            ResetScale(transform);
         }
             
         public static void ResetPosition(this Transform transform) => 
@@ -33,9 +33,10 @@ namespace AlexTools.Extensions
 
         public static void Set(this Transform transform, Transform origin)
         {
-            transform.SetPosition(origin);
-            transform.SetRotation(origin);
-            transform.SetScale(origin);
+            
+            SetPosition(transform, origin);
+            SetRotation(transform, origin);
+            SetScale(transform, origin);
         }
             
         public static void SetPosition(this Transform transform, Transform origin) => 

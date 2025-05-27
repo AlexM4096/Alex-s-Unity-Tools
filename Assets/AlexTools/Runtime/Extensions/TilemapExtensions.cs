@@ -14,7 +14,11 @@ namespace AlexTools.Extensions
             var rectInt = tilemap.cellBounds.ToRectInt(orientation);
             
             Grid2<TTile> grid = new(rectInt);
-            grid.AssignValues(position => tilemap.GetTile<TTile>(position.ToVector3Int(orientation, height)));
+            grid.AssignValues(position => 
+                tilemap.GetTile<TTile>(
+                    position.ToVector3Int(orientation, height)
+                )
+            );
             
             return grid;
         }

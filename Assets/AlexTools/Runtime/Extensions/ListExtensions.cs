@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlexTools.Enumerators;
 using AlexTools.Random;
 
 namespace AlexTools.Extensions
@@ -237,7 +238,9 @@ namespace AlexTools.Extensions
         }
 
         #endregion
-        
+
+        #region FastReverse
+
         public static IEnumerable<T> FastReverse<T>(this IList<T> list)
         {
             for (int i = list.Count - 1; i >= 0; i--)
@@ -255,6 +258,8 @@ namespace AlexTools.Extensions
             for (int i = list.Count - 1; i >= 0; i--)
                 yield return list[i];
         }
+
+        #endregion
         
         public static CycleEnumerator<T> GetCycleEnumerator<T>(this IList<T> list) => new(list);
         public static CycleEnumerator GetCycleEnumeratorO(this IList list) => new(list);

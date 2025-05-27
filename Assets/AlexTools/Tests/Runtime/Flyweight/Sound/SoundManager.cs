@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Linq;
 using AlexTools.Coroutines;
 using AlexTools.Extensions;
 using AlexTools.Flyweight;
@@ -18,13 +17,16 @@ namespace AlexTools.Tests.Runtime.Flyweight
         private IRandom _random;
 
         private Dice _dice;
+
+        private CoroutineHandler _handler;
         
         private void Start()
         {
             _factory = new FlyweightFactory();
             _random = _random.OrDefault();
-            
-            var routine = PlayRandomSounds().Start(this);
+
+            _handler = PlayRandomSounds().CreateHandler(this);
+            _handler.Start();
         }
 
         public void PlayOneShot(SoundType? type = null, float volume = 1) =>

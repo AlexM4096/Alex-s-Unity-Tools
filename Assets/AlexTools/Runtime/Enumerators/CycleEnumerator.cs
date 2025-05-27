@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace AlexTools
+namespace AlexTools.Enumerators
 {
     public interface ICycleEnumerator : IEnumerator
     {
