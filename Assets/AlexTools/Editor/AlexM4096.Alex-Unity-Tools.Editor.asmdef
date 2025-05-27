@@ -2,9 +2,13 @@
     "name": "AlexM4096.Alex-Unity-Tools.Editor",
     "rootNamespace": "",
     "references": [
-        "AlexM4096.Alex-Unity-Tools.Runtime"
+        "AlexM4096.Alex-Unity-Tools.Runtime",
+        "UnityEngine.UI",
+        "UnityEditor.UI"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
