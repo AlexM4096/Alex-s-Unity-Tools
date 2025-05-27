@@ -40,7 +40,7 @@ namespace AlexTools.Extensions
             
             var screenshot = new Texture2D(
                 renderTexture.width,
-                renderTexture.width,
+                renderTexture.height,
                 renderTexture.graphicsFormat,
                 TextureCreationFlags.None
             );
